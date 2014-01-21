@@ -61,10 +61,12 @@
 							<li><a href="{{ link }}">{{ name }}</a></li>
 							{% endfor %}
 
+						{% if TAGS_IN_MOBILE_SIDEBAR %}
 						<li><label>Tags</label></li>
 							{% for tag, articles in tags|sort %}
 							<li><a href="{{ SITEURL }}/{{ tag.url|replace(' ', '-') }}">{{ tag }}</a></li>
 							{% endfor %}
+						{% endif %}
 
 						<li><label>Links</label></li>
 							{% for name, link in SOCIAL|sort %}
@@ -145,7 +147,7 @@
 				<!-- Footer -->
 				<footer class="row">
 					<div class="large-12 columns text-center">
-						<p>&copy; 2014 <a href="mailto:kenton@hamaluik.com">Kenton Hamaluik</a></p>
+						<p>Powered by <a href="http://getpelican.com">Pelican</a></p>
 					</div>
 				</footer>
 				<!-- End Footer -->
