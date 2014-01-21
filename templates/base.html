@@ -1,0 +1,162 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>{% block windowtitle %}{{ SITENAME }}{% endblock %}</title>
+		<meta name="description" content="">
+		<meta name="author" content="{{ AUTHOR }}">
+
+		<link rel="stylesheet" href="{{ SITEURL }}/theme/css/foundation.css" />
+		<link rel="stylesheet" href="{{ SITEURL }}/theme/css/pygment/monokai.css" />
+		<link rel="stylesheet" href="{{ SITEURL }}/theme/css/custom.css" />
+
+		{% if ALTERNATE_FONTS %}
+		<!-- GOOGLE WEB FONTS -->
+		<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700|Droid+Sans+Mono|Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="{{ SITEURL }}/theme/css/alt-fonts.css" />
+		{% endif %}
+
+		<script src="{{ SITEURL }}/theme/js/modernizr.js"></script>
+
+		<!-- Feeds -->
+		{% if FEED_ALL_ATOM %}
+		<link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Atom Feed" />
+		{% endif %}
+		{% if FEED_ALL_RSS %}
+		<link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
+		{% endif %}
+
+		{% include "analytics.html" %}
+
+		<!-- mathjax config similar to math.stackexchange -->
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+			tex2jax: {
+				inlineMath: [ ['$', '$'] ],
+				displayMath: [ ['$$', '$$']],
+				processEscapes: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+			},
+			messageStyle: "none",
+			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+		});
+		</script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	</head>
+	<body>
+		<div class="off-canvas-wrap">
+			<div class="inner-wrap">
+				<aside class="left-off-canvas-menu">
+					<ul class="off-canvas-list">
+						<li><label>Categories</label></li>
+						{% for cat, articles in categories %}
+							<li {% if cat == category %}class="active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
+						{% endfor %}
+
+						<li><label>Places</label></li>
+							{% for name, link in LINKS %}
+							<li><a href="{{ link }}">{{ name }}</a></li>
+							{% endfor %}
+
+						<li><label>Tags</label></li>
+							{% for tag, articles in tags|sort %}
+							<li><a href="{{ SITEURL }}/{{ tag.url|replace(' ', '-') }}">{{ tag }}</a></li>
+							{% endfor %}
+
+						<li><label>Links</label></li>
+							{% for name, link in SOCIAL|sort %}
+							<li><a href="{{ link }}">{{ name }}</a></li>
+							{% endfor %}
+					</ul>	
+				</aside>
+
+				<nav class="tab-bar show-for-small">
+					<a class="left-off-canvas-toggle menu-icon">
+						<span><a href="{{ SITEURL }}/">{{ SITENAME|replace(' ', '&nbsp;') }}</a></span>
+					</a>
+				</nav>
+
+				<nav class="top-bar hide-for-small-only" data-topbar>
+					<ul class="title-area">
+						<li class="name active">
+							<h1><a href="{{ SITEURL }}/">{{ SITENAME }}</a></h1>
+						</li>
+					</ul>
+
+					<section class="top-bar-section">
+						<!-- Left Nav Section -->
+						<ul class="left">
+							{% for cat, articles in categories %}
+								<li {% if cat == category %}class="active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
+							{% endfor %}
+						</ul>
+					</section>
+				</nav>
+
+				<!-- Main Page Content and Sidebar -->
+				<div class="row">
+					<!-- Main Content -->
+					<div class="medium-9 small-12 columns" role="content">
+						{% if pagetitle is defined %}
+						<div class="row">
+							<div class="small-12 columns">
+								<h2>{{ pagetitle }}</h2>
+							</div>
+						</div>
+						{% endif %}
+						{% block content %}{% endblock %}
+					</div>
+					<!-- End Main Content -->
+					<!-- Sidebar -->
+					<aside class="medium-3 hide-for-small-only columns">
+						<div class="panel">
+							<h5>Places</h5>
+							<ul class="side-nav">
+								{% for name, link in LINKS %}
+								<li><a href="{{ link }}">{{ name }}</a></li>
+								{% endfor %}
+							</ul>
+						</div>
+
+						<div class="panel">
+							<h5>Tags</h5>
+							<ul class="tag-cloud">
+								{% for tag in tag_cloud %}
+								<li><a href="/tag/{{ tag.0|lower|replace(' ', '-') }}/" class="tag-{{ tag.1 }}">{{ tag.0 }}</a></li>
+								{% endfor %}
+							</ul>
+						</div>
+
+						<div class="panel">
+							<h5>Links</h5>
+							<ul class="side-nav">
+								{% for name, link in SOCIAL|sort %}
+								<li><a href="{{ link }}">{{ name }}</a></li>
+								{% endfor %}
+							</ul>
+						</div>
+					</aside>
+					<!-- End Sidebar -->
+				</div>
+
+				<!-- Footer -->
+				<footer class="row">
+					<div class="large-12 columns text-center">
+						<p>&copy; 2014 <a href="mailto:kenton@hamaluik.com">Kenton Hamaluik</a></p>
+					</div>
+				</footer>
+				<!-- End Footer -->
+
+			</div><!--off-canvas inner-->
+		</div><!--off-canvas wrap-->
+
+		<script src="{{ SITEURL }}/theme/js/jquery.js"></script>
+		<script src="{{ SITEURL }}/theme/js/foundation.min.js"></script>
+		<script>
+			$(document).foundation();
+		</script>
+	</body>
+</html>
