@@ -1,7 +1,7 @@
 foundation-default-colours
 ==========================
 
-A pelican theme using Zurb Foundation 5 with the default colour theme.
+A pelican theme using Zurb Foundation 5 with the default colour theme, including full mobile support (menus and display change when using a small screen).
 
 There are seven theme-specific settings you can set in your **pelicanconf.py** file (the settings shown are the defaults):
 
