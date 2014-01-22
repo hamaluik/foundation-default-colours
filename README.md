@@ -45,4 +45,6 @@ If you wish to enable a listing of monthly archives in the sidebar, do so by set
 MONTH_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/{date:%m}/index.html'
 ```
 
+On my site, I like to include centered images with small captions below them embedded throughout my posts. To do this easily, I wrote a Pelican plugin that you can access at https://github.com/FuzzyWuzzie/foundation_images. It is designed to work with this theme, usage information can be found in it's repository's README.
+
 Enjoy!
