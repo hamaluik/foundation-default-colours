@@ -102,3 +102,8 @@ code {
 p {
 	text-align: justify;
 }
+
+.continue {
+	width: 100%;
+	text-align: right;
+}

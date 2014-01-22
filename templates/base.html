@@ -63,6 +63,7 @@
 				<!-- mobile side bar nav -->
 				<aside class="left-off-canvas-menu">
 					<ul class="off-canvas-list">
+						<li><a href="{{ SITEURL }}">Home</a></li>
 						<li><label>Categories</label></li>
 						{% for cat, articles in categories %}
 							<li {% if cat == category %}class="active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>

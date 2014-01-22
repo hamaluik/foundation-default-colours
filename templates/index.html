@@ -6,8 +6,12 @@
 {% for article in (articles_page.object_list if articles_page else articles) %}
 <article>
 	<h3><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></h3>
-	<h6>Written by <a href="{{ SITEURL }}/author/{{ article.author|lower|replace(' ', '-') }}.html">{{ article.author }}</a> on {{ article.locale_date }}.</h6>
+	<h6>Written by <a href="{{ SITEURL }}/author/{{ article.author|lower|replace(' ', '-') }}.html">{{ article.author }}</a> {% if article.category %}in <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category}}</a> {% endif %}on {{ article.locale_date }}.{% if article.tags|count > 0 %} Tags: {% for tag in article.tags %}<a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>, {% endfor %}{% endif %}</h6>
 	{{ article.content if FRONT_PAGE_FULL_ARTICLES else article.summary }}
+	{% if not FRONT_PAGE_FULL_ARTICLES %}
+		{# add a 'Continue reading' link if we're displaying summaries #}
+		<p class="continue"><a href="{{ SITEURL }}/{{ article.url }}">Continue reading &raquo;</a></p>
+	{% endif %}
 </article>
 <hr />
 {% endfor %}
@@ -40,3 +44,4 @@
 {% endif %}
 
 {% endblock %}
+
