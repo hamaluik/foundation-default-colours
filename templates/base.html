@@ -68,6 +68,13 @@
 							{% endfor %}
 						{% endif %}
 
+						<li><label>Monthly Archives</label></li>
+							{% for year, date_year in dates|groupby( 'date.year' )|sort(reverse=True) %}
+								{% for month, articles in date_year|groupby( 'date.month' )|sort(reverse=True) %}
+									<li><a href="/posts/{{ year }}/{{ articles[0].date.strftime('%m') }}/">{{ articles[0].date.strftime('%B') }} {{ year }} ({{ articles|count }})</a></li>
+								{% endfor %}
+							{% endfor %}
+
 						<li><label>Links</label></li>
 							{% for name, link in SOCIAL|sort %}
 							<li><a href="{{ link }}">{{ name }}</a></li>
@@ -133,6 +140,17 @@
 						</div>
 
 						<div class="panel">
+							<h5>Monthly Archives</h5>
+							<ul class="side-nav">
+								{% for year, date_year in dates|groupby( 'date.year' )|sort(reverse=True) %}
+									{% for month, articles in date_year|groupby( 'date.month' )|sort(reverse=True) %}
+										<li><a href="/posts/{{ year }}/{{ articles[0].date.strftime('%m') }}/">{{ articles[0].date.strftime('%B') }} {{ year }} ({{ articles|count }})</a></li>
+									{% endfor %}
+								{% endfor %}
+							</ul>
+						</div>
+
+						<div class="panel">
 							<h5>Links</h5>
 							<ul class="side-nav">
 								{% for name, link in SOCIAL|sort %}
@@ -146,8 +164,8 @@
 
 				<!-- Footer -->
 				<footer class="row">
-					<div class="large-12 columns text-center">
-						<p>Powered by <a href="http://getpelican.com">Pelican</a></p>
+					<div class="small-12 columns text-center">
+						<p>Powered by <a href="http://getpelican.com">Pelican</a> and <a href="http://foundation.zurb.com/">Zurb Foundation</a>.</p>
 					</div>
 				</footer>
 				<!-- End Footer -->
