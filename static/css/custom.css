@@ -107,3 +107,11 @@ p {
 	width: 100%;
 	text-align: right;
 }
+
+.archive-year {
+	border-top: 1px solid;
+}
+
+.archive-entry {
+	border-top: 1px dotted;
+}
