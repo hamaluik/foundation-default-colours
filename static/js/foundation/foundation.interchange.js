@@ -4,7 +4,7 @@
   Foundation.libs.interchange = {
     name : 'interchange',
 
-    version : '5.0.3',
+    version : '5.0.0',
 
     cache : {},
 
@@ -15,7 +15,7 @@
       load_attr : 'interchange',
 
       named_queries : {
-        'default' : 'only screen',
+        'default' : Foundation.media_queries.small,
         small : Foundation.media_queries.small,
         medium : Foundation.media_queries.medium,
         large : Foundation.media_queries.large,
@@ -71,7 +71,6 @@
       Foundation.inherit(this, 'throttle');
 
       this.data_attr = 'data-' + this.settings.load_attr;
-      $.extend(true, this.settings, method, options);
 
       this.bindings(method, options);
       this.load('images');
@@ -179,7 +178,7 @@
     },
 
     update_nodes : function () {
-      var nodes = this.S('[' + this.data_attr + ']').not('img'),
+      var nodes = this.S('[' + this.data_attr + ']:not(img)'),
           count = nodes.length,
           loaded_count = 0,
           data_attr = this.data_attr;
@@ -267,7 +266,7 @@
       var uuid = this.uuid(),
           current_uuid = el.data('uuid');
 
-      if (this.cache[current_uuid]) return this.cache[current_uuid];
+      if (current_uuid) return this.cache[current_uuid];
 
       el.attr('data-uuid', uuid);
 
